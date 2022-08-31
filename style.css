@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800&display=swap');
 :root {
     --accent: rgb(252, 195, 163);
+    --pointer: rgb(255, 151, 110);
 }
 * {
     margin: 0;
@@ -25,23 +26,61 @@ body {
     border-radius: 20px;
     box-shadow: 0 0 5px 5px rgb(209, 209, 209);
 }
-.title {
-    
-}
-.todoTask {
+.todoAddTask {
     --size: 50px;
     display: flex;
     margin: 16px 0 32px;
 }
-.todoTask input {
+.todoAddTask input {
     margin-right: 16px;
     font-size: 18px;
     padding: 8px 16px;
     height: var(--size);
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    flex-grow: 1;
 }
 .todoAdd {
     height: var(--size);
     width: var(--size);
-    border: 1px solid var(--accent);
+    border: 1px solid rgb(209, 209, 209);
     background-color: var(--accent);
+    text-align: center;
+    font-size: 32px;
+    color: white;
+    border-radius: 10px;
+}
+.todoAdd:hover {
+    cursor: pointer;
+    background-color: var(--pointer);
+}
+.list {
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    align-items: center;
+}
+.todoTask {
+    display: flex;
+    --size: 47px;
+    border: 1px solid var(--accent);
+    padding: 10px;
+}
+.todoTask:hover , .taskEdit, .taskDel {
+    display: true;
+}
+.todoCheckbox {
+    margin-right: 16px;
+    justify-content: center;
+}
+.taskEdit {
+    margin-left: auto;
+    margin-right: 10px;
+}
+.taskEdit, .taskDel {
+    color: var(--accent);
+    display: none;
+}
+.taskEdit:hover, .taskDel:hover {
+    cursor: pointer;
+    color: var(--pointer);
 }

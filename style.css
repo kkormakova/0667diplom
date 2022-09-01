@@ -3,14 +3,15 @@
 :root {
     --accent: rgb(252, 195, 163);
     --pointer: rgb(255, 151, 110);
+    --fon:  rgb(252, 241, 225);
+    --shadow: rgb(209, 209, 209);
 }
 * {
     margin: 0;
     box-sizing: border-box;
 }
 body {
-    background-color: rgb(252, 241, 225);
-     /* font-family: 'Caveat', cursive;  */
+    background-color: var(--fon);
     font-family: 'Nunito', sans-serif;
     font-size: 18px;
     font-weight: 300;
@@ -24,7 +25,7 @@ body {
     background-color: rgb(255, 255, 254);
     width: 70vw;
     border-radius: 20px;
-    box-shadow: 0 0 5px 5px rgb(209, 209, 209);
+    box-shadow: 0 0 5px 5px var(--shadow);
 }
 .todoAddTask {
     --size: 50px;
@@ -36,14 +37,14 @@ body {
     font-size: 18px;
     padding: 8px 16px;
     height: var(--size);
-    border: 1px solid rgb(209, 209, 209);
+    border: 1px solid var(--shadow);
     border-radius: 10px;
     flex-grow: 1;
 }
 .todoAdd {
     height: var(--size);
     width: var(--size);
-    border: 1px solid rgb(209, 209, 209);
+    border: 1px solid var(--shadow);
     background-color: var(--accent);
     text-align: center;
     font-size: 32px;
@@ -56,21 +57,50 @@ body {
 }
 .list {
     font-family: 'Caveat', cursive;
-    font-size: 20px;
+    font-size: 24px;
     align-items: center;
 }
 .todoTask {
     display: flex;
-    --size: 47px;
+    align-items: center;
     border: 1px solid var(--accent);
+    border-radius: 3px;
     padding: 10px;
+    margin-bottom: 10px;
 }
-.todoTask:hover , .taskEdit, .taskDel {
-    display: true;
+.todoTask_complete .taskText{
+    text-decoration: line-through;
+    color: rgb(189, 189, 189);
 }
 .todoCheckbox {
     margin-right: 16px;
-    justify-content: center;
+}
+.todoCheckbox input {
+    display: none;
+}
+.todoCheckbox input:checked + div {
+    background-color: var(--accent);
+}
+.todoCheckbox input:checked + div::after {
+    display: block;
+}
+.todoCheckbox div {
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    position: relative;
+}
+.todoCheckbox div::after {
+    content: "✔";
+    text-align: center;
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 .taskEdit {
     margin-left: auto;
@@ -78,7 +108,6 @@ body {
 }
 .taskEdit, .taskDel {
     color: var(--accent);
-    display: none;
 }
 .taskEdit:hover, .taskDel:hover {
     cursor: pointer;

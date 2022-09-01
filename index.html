@@ -13,18 +13,18 @@
         <div class="content">
             <h1 class="title"> My daily planer</h1>
             <div class="todoAddTask">
-                <input type="text" placeholder="What needs to be done?">
-                <!-- <div class="todoAdd">+</div> -->
-                <button class="todoAdd">+</button>
+                <input type="text" placeholder="What needs to be done?" id="inputAddTask">
+                <button class="todoAdd" id="addButton">+</button>
             </div>
-            <div class="list">
-                <div class="todoTask">
+            <div class="list" id="list">
+                <div class="todoTask todoTask_complete">
                     <label class="todoCheckbox">
                         <input type="checkbox">
+                        <div></div>
                     </label>
                     <div class="taskText">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</div>
-                    <div class="taskEdit"><i class="fa-regular fa-pen-to-square"></i></div>
-                    <div class="taskDel"><i class="fa-regular fa-trash-can"></i></div>
+                    <div class="taskEdit" id="edit"><i class="fa-regular fa-pen-to-square"></i></div>
+                    <div class="taskDel" id="delete"><i class="fa-regular fa-trash-can"></i></div>
                 </div>
             </div>
         </div>

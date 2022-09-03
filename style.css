@@ -59,6 +59,7 @@ body {
     font-family: 'Caveat', cursive;
     font-size: 24px;
     align-items: center;
+    padding: 0;
 }
 .todoTask {
     display: flex;
@@ -68,10 +69,10 @@ body {
     padding: 10px;
     margin-bottom: 10px;
 }
-.todoTask_complete .taskText{
+/* .complete{
     text-decoration: line-through;
     color: rgb(189, 189, 189);
-}
+} */
 .todoCheckbox {
     margin-right: 16px;
 }
@@ -102,14 +103,11 @@ body {
     bottom: 0;
     left: 0;
 }
-.taskEdit {
-    margin-left: auto;
-    margin-right: 10px;
-}
-.taskEdit, .taskDel {
+.taskDel {
     color: var(--accent);
+    margin-left: auto;
 }
-.taskEdit:hover, .taskDel:hover {
+.taskDel:hover {
     cursor: pointer;
     color: var(--pointer);
 }

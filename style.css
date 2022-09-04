@@ -69,10 +69,10 @@ body {
     padding: 10px;
     margin-bottom: 10px;
 }
-/* .complete{
+.complete{
     text-decoration: line-through;
     color: rgb(189, 189, 189);
-} */
+}
 .todoCheckbox {
     margin-right: 16px;
 }

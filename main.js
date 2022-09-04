@@ -12,32 +12,45 @@ if(localStorage.getItem("todo")) {
 //Обрабатываем кнопку добавления
 addButton.addEventListener("click", () => {
     let newTodo = {
+        id: Date.now(),
         todo: inputAddTask.value,
         checked: false,
     };
-    //если инпут не пустой то добавляем задачи
-    if (inputAddTask.value) { 
+    //если инпут не пустой и такой задачи нет в массиве то добавляем задачи
+    if (inputAddTask.value && isNotHaveTask(inputAddTask.value, todoList)) { 
         todoList.push(newTodo);
         displayMessages();
         localStorage.setItem("todo", JSON.stringify(todoList)); //Заносим данные в Локал, сохраняем его в JSON
-        inputAddTask.value = "";
+        inputAddTask.value = "";//сбрасываем инпут
     }
 });
+//Проверка существования задачи в массиве
+function isNotHaveTask(todo, taskList) {
+    let isNotHave = true;
+    taskList.forEach((newTodo) => {
+        if(newTodo.todo === todo) {
+            alert("Такая задача уже существует!");
+            isNotHave = false;
+        }
+    });
+    return isNotHave;
+}
 
 //Функция отображения задачи
 function displayMessages() {
     let displayMessage = " ";
-    if(todoList.length === 0) todo.innerHTML = "";
+    if(todoList.length === 0) list.innerHTML = "";//Если масиив пуст то ничего не отображать
     //Перебираем массив и выводим задачи, присваеваем каждой задаче уникальный id
     todoList.forEach((item, i)=>{
+        let cls = item.checked ? "complete" : "";
         displayMessage += `
-        <li class="todoTask">
+        <li class="todoTask" id=${item.id}>
             <label class="todoCheckbox" >
                 <input type="checkbox" id="item_${i}" ${item.checked ? "checked" : ""}>
                 <div></div>
             </label>
-            <div for="item_${i}">${item.todo}</div>
-            <div class="taskDel" id="del" onclick="deleteTask()"><i class="fa-regular fa-trash-can"></i></div>
+            <div  class="${cls}" for="item_${i}">${item.todo}</div>
+            <div class="taskDel" id="del"><i class="fa-regular fa-trash-can"></i></div>
         </li>
         `;
         list.innerHTML = displayMessage;
@@ -54,32 +67,26 @@ list.addEventListener("change", (event) => {
             item.checked = !item.checked;//Перезаписываем значение checked
             localStorage.setItem("todo",JSON.stringify(todoList));//Заносим изменения checked в Локал
         }
-        
+        displayMessages();
     });
 });
-
-function deleteTask() {
-        todoList.forEach((i) => {
-        todoList.splice(i, 1);
+//По клику вызываем функцию удаления задачи
+list.onclick = (event) => {
+    let isDelElem = event.target.classList.contains("fa-regular");
+    if (isDelElem) {
+        let task = event.target.parentElement.parentElement;
+        let taskId = task.getAttribute("id");//Ищем id у li
+        deleteTask(taskId, todoList);
         displayMessages();
-        localStorage.setItem("todo",JSON.stringify(todoList));
-    });  
-}
-// todoList.forEach(() => {
-//     let dels = document.querySelectorAll("#delete");
-//     for (del of dels) {
-//         del.addEventListener("click", (event) => {
-//             let del = event.target;
-//         console.log("click");
-//         });
-//     }
-// });
+    }
+};
 
-// let dels = document.querySelectorAll("#delete");
-// for (del of dels) {
-//     del.addEventListener("click", (event) => {
-//         todoList.splice(i, 1);
-//         displayMessages();
-//         localStorage.setItem("todo",JSON.stringify(todoList));
-//     });
-// }
+//Функция удаления задачи
+function deleteTask(id, todoList) {
+    todoList.forEach((item, idx) => {
+        if(item.id == id) {
+            todoList.splice(idx, 1);
+            localStorage.setItem("todo", JSON.stringify(todoList));
+        }
+    });
+}

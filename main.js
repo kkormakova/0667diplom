@@ -2,7 +2,6 @@ let inputAddTask = document.getElementById("inputAddTask");
 let addButton = document.getElementById("addButton");
 let list = document.getElementById("list");
 let todoList = [];
-let todoItemElems = [];
 
 //Выводим то, что лежало у нас в Локал
 if(localStorage.getItem("todo")) {
@@ -28,6 +27,7 @@ addButton.addEventListener("click", () => {
 //Функция отображения задачи
 function displayMessages() {
     let displayMessage = " ";
+    if(todoList.length === 0) todo.innerHTML = "";
     //Перебираем массив и выводим задачи, присваеваем каждой задаче уникальный id
     todoList.forEach((item, i)=>{
         displayMessage += `
@@ -37,7 +37,7 @@ function displayMessages() {
                 <div></div>
             </label>
             <div for="item_${i}">${item.todo}</div>
-            <div class="taskDel" id="delete" onclick="deleteTask(${i})"><i class="fa-regular fa-trash-can"></i></div>
+            <div class="taskDel" id="del" onclick="deleteTask()"><i class="fa-regular fa-trash-can"></i></div>
         </li>
         `;
         list.innerHTML = displayMessage;
@@ -57,6 +57,29 @@ list.addEventListener("change", (event) => {
         
     });
 });
-function deleteTask(i) {
-    console.log(i);
+
+function deleteTask() {
+        todoList.forEach((i) => {
+        todoList.splice(i, 1);
+        displayMessages();
+        localStorage.setItem("todo",JSON.stringify(todoList));
+    });  
 }
+// todoList.forEach(() => {
+//     let dels = document.querySelectorAll("#delete");
+//     for (del of dels) {
+//         del.addEventListener("click", (event) => {
+//             let del = event.target;
+//         console.log("click");
+//         });
+//     }
+// });
+
+// let dels = document.querySelectorAll("#delete");
+// for (del of dels) {
+//     del.addEventListener("click", (event) => {
+//         todoList.splice(i, 1);
+//         displayMessages();
+//         localStorage.setItem("todo",JSON.stringify(todoList));
+//     });
+// }
